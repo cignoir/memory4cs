@@ -12,8 +12,10 @@ namespace memory4cs
     {
         Process process;
         
-        public Memory()
+        public Memory(string name)
         {
+            var processes = Process.GetProcessesByName(name);
+            this.process = processes.Length > 0 ? processes.First() : null;
         }
 
         public Memory(int pid)
