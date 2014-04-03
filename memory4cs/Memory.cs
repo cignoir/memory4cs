@@ -46,7 +46,8 @@ namespace memory4cs
 
         public int ReadInt(int address, int size, int baseAddress = 0)
         {
-            return int.Parse(HexString(Read(address, size, baseAddress)), NumberStyles.HexNumber);
+            var bytes = Read(address, size, baseAddress);
+            return int.Parse(BitConverter.ToString(bytes).Replace("-", ""), NumberStyles.HexNumber);
         }
 
         public void Write(int address, byte[] bytes, int baseAddress = 0)
@@ -62,12 +63,7 @@ namespace memory4cs
 
         public void WriteInt(int address, int num, int baseAddress = 0)
         {
-            // implement me
-        }
-
-        private string HexString(byte[] bytes)
-        {
-            return BitConverter.ToString(bytes).Replace("-", "");
+            WriteString(address, Convert.ToString(num, 16), baseAddress);
         }
     }
         
