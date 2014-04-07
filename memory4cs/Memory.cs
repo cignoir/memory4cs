@@ -45,9 +45,10 @@ namespace memory4cs
             return Encoding.Unicode.GetString(Read(address, size));
         }
 
-        public int ReadInt(int address, int size)
+        public int ReadInt(int address, int size, int byteOrder = 0)
         {
             var bytes = Read(address, size);
+            if(byteOrder == Memory.BYTE_ORDER_LE) Array.Reverse(bytes);
             return int.Parse(BitConverter.ToString(bytes).Replace("-", ""), NumberStyles.HexNumber);
         }
 
