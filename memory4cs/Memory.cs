@@ -31,40 +31,7 @@ namespace memory4cs
         {
             this.process = process;
         }
-
-        public byte[] Read(int address, int size)
-        {
-            var buffer = new byte[size];
-            Win32API.ReadProcessMemory(process.Handle.ToInt32(), address, buffer, size, 0);
-            return buffer;
-        }
-
-        public string ReadString(int address, int size)
-        {
-            return Encoding.Unicode.GetString(Read(address, size));
-        }
-
-        public int ReadInt(int address, int size, ByteOrder byteOrder = ByteOrder.LITTLE_ENDIAN)
-        {
-            var bytes = Read(address, size);
-            if(byteOrder == ByteOrder.LITTLE_ENDIAN) Array.Reverse(bytes);
-            return int.Parse(BitConverter.ToString(bytes).Replace("-", ""), NumberStyles.HexNumber);
-        }
-
-        public void Write(int address, byte[] bytes)
-        {
-            Win32API.WriteProcessMemory(process.Handle.ToInt32(), address, bytes, bytes.Length, 0);
-        }
-
-        public void WriteString(int address, string str)
-        {
-            Write(address, Encoding.Unicode.GetBytes(str + "\0"));
-        }
-
-        public void WriteInt(int address, int num)
-        {
-            WriteString(address, Convert.ToString(num, 16));
-        }
+        
     }
         
 }

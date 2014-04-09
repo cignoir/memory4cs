@@ -41,8 +41,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ByteOrder.cs" />
+    <Compile Include="ByteSize.cs" />
     <Compile Include="Memory.cs" />
+    <Compile Include="Memory.read.cs" />
     <Compile Include="Memory.static.cs" />
+    <Compile Include="Memory.write.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Win32API.cs" />
   </ItemGroup>
