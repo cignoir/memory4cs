@@ -18,9 +18,6 @@ namespace memory4cs
         static uint END = 0xFFF; //if you have Windows XP or Windows Server 2003 you must change this to 0xFFFF
         static uint PROCESS_ALL_ACCESS = (DELETE | READ_CONTROL | WRITE_DAC | WRITE_OWNER | SYNCHRONIZE | END);
 
-        static int BYTE_ORDER_LE = 0;
-        //static int BYTE_ORDER_BE = 1;
-
         public static int ObjectSize(object TestObject)
         {
             BinaryFormatter bf = new BinaryFormatter();

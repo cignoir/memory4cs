@@ -11,6 +11,10 @@ namespace memory4cs
     public partial class Memory
     {
         Process process;
+        public int BaseAddress
+        {
+            get { return process != null ? process.MainModule.BaseAddress.ToInt32() : 0; }
+        }
         
         public Memory(string name)
         {
@@ -28,11 +32,6 @@ namespace memory4cs
             this.process = process;
         }
 
-        public int BaseAddress()
-        {
-            return process != null ? process.MainModule.BaseAddress.ToInt32() : 0;
-        }
-
         public byte[] Read(int address, int size)
         {
             var buffer = new byte[size];
@@ -45,10 +44,10 @@ namespace memory4cs
             return Encoding.Unicode.GetString(Read(address, size));
         }
 
-        public int ReadInt(int address, int size, int byteOrder = 0)
+        public int ReadInt(int address, int size, ByteOrder byteOrder = ByteOrder.LITTLE_ENDIAN)
         {
             var bytes = Read(address, size);
-            if(byteOrder == Memory.BYTE_ORDER_LE) Array.Reverse(bytes);
+            if(byteOrder == ByteOrder.LITTLE_ENDIAN) Array.Reverse(bytes);
             return int.Parse(BitConverter.ToString(bytes).Replace("-", ""), NumberStyles.HexNumber);
         }
 
